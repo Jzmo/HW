@@ -1,1 +1,2 @@
-tensorflow 学习中
+tensorflow - Udacity
+after class task by Jzmo
