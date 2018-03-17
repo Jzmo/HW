@@ -13,6 +13,6 @@ build
 
 # my file
 *.gz
-notNMIST_large/
-notNMIST_small/
+notNMIST/notNMIST_large/
+notNMIST/notNMIST_small/
 
