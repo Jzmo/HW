@@ -27,6 +27,6 @@ This project just use to understand the basic process of tensorflow learning<br>
 * test the accurancy<br>
 * plot (use matplotlib)<br>
 #### result
-![image](https://github.com/Jzmo/tf/BasicTest/LinearRegression/Result.png)
-
+![image](https://github.com/Jzmo/tf/BasicTest/LinearRegression/result.PNG)
+![image](https://github.com/Jzmo/tf/BasicTest/LinearRegression/linearRegression.png)
 ### notMNIST from Udacity
