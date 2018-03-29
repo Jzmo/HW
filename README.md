@@ -21,7 +21,7 @@ This project just use to understand the basic process of tensorflow learning<br>
   * the function to predict y(pred_y = x*w+b)<br>
   * the cost and optimizer<br>
 * run session to train data<br>
-  * init all variable<br>
+  * init all variable<br>
   * run optimizer<br>
   * if needed, run other operation and print log information<br>
 * test the accurancy<br>
