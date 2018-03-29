@@ -11,7 +11,7 @@ This project just use to understand the basic process of tensorflow learning<br>
   * x:[1.3 4.6 6.6 3.4 9.4 4.2 1.1 2.3 4.9]<br>
   * y:[ 2.6  9.2 13.2  6.8 18.8  8.4  2.2  4.6  9.8]<br>
 #### process
->set parameter<br>
+* set parameter<br>
   * learning_epochs -- like the number of iterations<br>
   * learning_rate -- rate of descent<br>
 * set train and test dataset (and valid dataset)<br>
@@ -23,10 +23,10 @@ This project just use to understand the basic process of tensorflow learning<br>
 * run session to train data<br>
   * init all variable<br>
   * run optimizer<br>
-  *if needed, run other operation and print log information<br>
+  * if needed, run other operation and print log information<br>
 * test the accurancy<br>
 * plot (use matplotlib)<br>
 #### result
-![](https://github.com/Jzmo/tf/BasicTest/LinearRegression/Result.png)
+![image](https://github.com/Jzmo/tf/BasicTest/LinearRegression/Result.png)
 
 ### notMNIST from Udacity
