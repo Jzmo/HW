@@ -28,6 +28,6 @@ This project just use to understand the basic process of tensorflow learning<br>
 * plot (use matplotlib)<br>
 #### result
 ![image](http://github.com/itmyhome2013/readme_add_pic/raw/master/images/nongshalie.jpg)
-![image](https://github.com/Jzmo/tf/BasicTest/LinearRegression/result.PNG)
+![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/result.PNG)
 ![image](https://github.com/Jzmo/tf/BasicTest/LinearRegression/linearRegression.png)
 ### notMNIST from Udacity
