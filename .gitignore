@@ -15,4 +15,4 @@ build
 *.gz
 notMNIST/notMNIST_large/
 notMNIST/notMNIST_small/
-
+idea/

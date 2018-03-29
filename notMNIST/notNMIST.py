@@ -164,9 +164,6 @@ def maybe_pickle(data_folders, min_num_images_per_class, force = False):
 train_datasets = maybe_pickle(train_folders, 45000)
 test_datasets = maybe_pickle(test_folders, 1800)
 
-
-
-
 # Problem 2
 # Let's verify that the data still looks good. Displaying a sample of the labels and images from the ndarray. Hint: you can use matplotlib.pyplot.
 
@@ -220,28 +217,120 @@ def isbalance(datasets):
 
 
 
-
 # Merge and prune the training data as needed. Depending on your computer setup, you might not be able to fit it all in memory, and you can tune train_size as needed. The labels will be stored into a separate array of integers 0 through 9.
 
 # Also create a validation dataset for hyperparameter tuning.
 
+def make_array(nb_rows,img_size):
 
+    if nb_rows:
+        dataset = np.ndarray(shape = (nb_rows,img_size,img_size), dtype = np.float32)
+        label = np.ndarray(shape = nb_rows, dtype = np.int32)
+    else:
+        dataset , label = None, None
+    return dataset, label
+    
+    
+def merge_datasets(pickle_files,train_size,valid_size = 0):
+    
+    num_classes = len(pickle_files)
+    start_v , start_t = 0, 0
+    end_v , end_t = valid_size, train_size
+    
+    valid_dataset, valid_label = make_array(num_classes*valid_size, image_size)
+    train_dataset, train_label = make_array(num_classes*train_size, image_size)
+    
+    print(valid_dataset.shape)
+    print(train_dataset.shape)
+    
+    for label, pickle_file in enumerate(pickle_files):
+        try:
+            with open(pickle_file,'rb') as f:
+                letter_set = pickle.load(f)
+                np.random.shuffle(letter_set)
+                if valid_size is not None:
+                    valid_set = letter_set[:valid_size,:,:]
+                    valid_dataset[start_v:end_v,:,:] = valid_set
+                    valid_label[start_v:end_v] = label
+                    start_v += valid_size
+                    end_v += valid_size
+                    
+                    train_letter = letter_set[valid_size:valid_size+train_size,:,:]
+                    train_dataset[start_t:end_t] = train_letter
+                    train_label[start_t:end_t] = label
+                    start_t += train_size
+                    end_t += train_size
+                    
+        except Exception as e:
+            print('Unable to process data from ',pickle_file,':',e)
+            raise
+    return valid_dataset, valid_label, train_dataset, train_label
 
+train_size = 100
+valid_size = 10
+test_size = 10
 
+valid_dataset, valid_labels, train_dataset, train_labels = merge_datasets(
+    train_datasets,train_size,valid_size)
+
+_, _, test_dataset, test_labels = merge_datasets(
+    test_datasets,test_size,test_size)
+    
+print('Training:', train_dataset.shape, train_labels.shape)
+print('Validation:', valid_dataset.shape, valid_labels.shape)
+print('Testing:', test_dataset.shape, test_labels.shape)
 
 # Next, we'll randomize the data. It's important to have the labels well shuffled for the training and test distributions to match.
 
-
+def randomize(dataset, labels):
+    permutation = np.random.permutation(labels.shape[0])
+    dataset = dataset[permutation]
+    labels = labels[permutation]
+    return dataset, labels
+    
+train_dataset, train_labels = randomize(train_dataset, train_labels)
+test_dataset, test_labels = randomize(test_dataset, test_labels)
+valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
 
 # Problem 4
 # Convince yourself that the data is still good after shuffling!
 
+def peek_display_shuffled(dataset,labels):
+    dataset_num = len(dataset)
+    img_index = np.random.randint(0,dataset_num)
+    img = dataset[img_index,:,:]
+    label = labels[img_index]
+    plt.imshow(img)
+    plt.title(label)
+    plt.show()
+    return None
 
-
+# peek_display_shuffled(train_dataset,train_labels)
+# peek_display_shuffled(valid_dataset,valid_labels)
+# peek_display_shuffled(test_dataset,test_labels)
 
 # Finally, let's save the data for later reuse:
 
+# pickled_file = os.path.join(data_root,'notMNIST.pickle')
 
+# try:
+    # f = open(pickled_file,'wb')
+    # save = {
+        # 'train_dataset':train_dataset,
+        # 'train_labels': train_labels,
+        # 'valid_dataset': valid_dataset,
+        # 'valid_labels': valid_labels,
+        # 'test_dataset': test_dataset,
+        # 'test_labels': test_labels,
+        # }
+    # pickle.dump(save,f,pickle.HIGHEST_PROTOCOL)
+    # f.close()
+# except Exception as e:
+    # print('Unable to save data to', pickled_file)
+    # raise
+
+# statinfo = os.stat(pickled_file)
+# print('Compressed pickle size:', statinfo.st_size)
 
 
 # Problem 5
@@ -253,11 +342,64 @@ def isbalance(datasets):
 # Create a sanitized validation and test set, and compare your accuracy on those in subsequent assignments.
 
 
-
-
+    
 # Problem 6
 # Let's get an idea of what an off-the-shelf classifier can give you on this data. It's always good to check that there is something to learn, and that it's a problem that is not so trivial that a canned solution solves it.
 
 # Train a simple model on this data using 50, 100, 1000 and 5000 training samples. Hint: you can use the LogisticRegression model from sklearn.linear_model.
 
 # Optional question: train an off-the-shelf model on all the data!
+
+classifier = {'L1 logistic':LogisticRegression(penalty = 'l1'),
+            'L2 logistic':LogisticRegression(penalty = 'l2'),
+            'L2 logistic(Multinomial)':LogisticRegression(penalty = 'l2',solver='lbfgs',multi_class='multinomial'),
+            }
+
+n_classifier = len(classifier)
+
+n_features = image_size * image_size
+
+# prepare train data
+n_train_samples, _, _= train_dataset.shape
+train_data = np.reshape(train_dataset,(n_train_samples, n_features))
+
+# prepare valid data
+n_valid_samples, _, _= valid_dataset.shape
+valid_data = np.reshape(valid_dataset,(n_valid_samples, n_features))
+
+# prepare test data
+n_test_samples, _, _= test_dataset.shape
+test_data = np.reshape(test_dataset,(n_test_samples, n_features))
+            
+for index,(name,classifier) in enumerate(classifier.items()):
+    classifier.fit(train_data,train_labels)
+            
+    rate = classifier.score(test_data, test_labels)
+    print("classifier rate for %s : %f " % (name, rate))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
