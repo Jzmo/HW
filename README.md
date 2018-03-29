@@ -11,21 +11,21 @@ This project just use to understand the basic process of tensorflow learning<br>
 >>x:[1.3 4.6 6.6 3.4 9.4 4.2 1.1 2.3 4.9]<br>
 >>y:[ 2.6  9.2 13.2  6.8 18.8  8.4  2.2  4.6  9.8]<br>
 #### process
->set parameter
->>learning_epochs -- like the number of iterations
->>learning_rate -- rate of descent
->set train and test dataset (and valid dataset)
->set variable of training net
->>the input of x and y (set with placeholder)
->>the wight and bias
->>the function to predict y(pred_y = x*w+b)
->>the cost and optimizer
->run session to train data
->>init all variable
->>run optimizer
->>if needed, run other operation and print log information
->test the accurancy
->plot (use matplotlib)
+>set parameter<br>
+>>learning_epochs -- like the number of iterations<br>
+>>learning_rate -- rate of descent<br>
+>set train and test dataset (and valid dataset)<br>
+>set variable of training net<br>
+>>the input of x and y (set with placeholder)<br>
+>>the wight and bias<br>
+>>the function to predict y(pred_y = x*w+b)<br>
+>>the cost and optimizer<br>
+>run session to train data<br>
+>>init all variable<br>
+>>run optimizer<br>
+>>if needed, run other operation and print log information<br>
+>test the accurancy<br>
+>plot (use matplotlib)<br>
 #### result
 ![](https://github.com/Jzmo/tf/BasicTest/LinearRegression/Result.png)
 
