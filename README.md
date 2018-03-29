@@ -1,6 +1,6 @@
 # some project based on tensorflow
 ### A simple linear regression
-This project just use to understand the basic process of tensorflow learning<br>
+This project is to understand the basic process of tensorflow learning<br>
 .py file: Jzmo/tf/BasicTest/Linear Regression<br>
 
 #### data
