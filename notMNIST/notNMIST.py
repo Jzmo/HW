@@ -376,30 +376,3 @@ for index,(name,classifier) in enumerate(classifier.items()):
             
     rate = classifier.score(test_data, test_labels)
     print("classifier rate for %s : %f " % (name, rate))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
