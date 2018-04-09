@@ -1,12 +1,13 @@
-This project is from [Deep Learning in Udacity](https://cn.udacity.com/course/deep-learning--ud730) as a after class task.  
-This task including some preprocessing and learning by sklearn
+## notMNIST
+This project is from [Deep Learning in Udacity](https://cn.udacity.com/course/deep-learning--ud730) as a after class task,  including some preprocessing and learning by sklearn.  
+(methods including:Ridge Regression、Lasso、Multi-task Lasso)  
 ### data
 notMNIST is a subset of English letters in different fonts from A to J. Dataset consists of small hand-cleaned part, about 19k instances, and large uncleaned dataset, 500k instances. Two parts have approximately 0.5% and 6.5% label error rate.  
-some examples of letter "A":  
+Some examples of letter "A":  
 ![image](http://yaroslavvb.com/upload/notMNIST/nmn.png)  
-data details can be found in [here](http://yaroslavvb.blogspot.hk/2011/09/notmnist-dataset.html)
+Data details can be found in [here](http://yaroslavvb.blogspot.hk/2011/09/notmnist-dataset.html)
 ### preprocess
-process details can be found in [here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/udacity/1_notmnist.ipynb)  
+Process details can be found in [here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/udacity/1_notmnist.ipynb)  
 **problem 1**  
 Let's take a peek at some of the data to make sure it looks sensible. Each exemplar should be an image of a character A through J rendered in a different font. Display a sample of the images that we just downloaded.  
 ```python
@@ -90,5 +91,36 @@ def peek_display_shuffled(dataset,labels):
 # peek_display_shuffled(valid_dataset,valid_labels)
 # peek_display_shuffled(test_dataset,test_labels)
 ```  
+``` python
+classifier = {'L1 logistic':LogisticRegression(penalty = 'l1'),
+            'L2 logistic':LogisticRegression(penalty = 'l2'),
+            'L2 logistic(Multinomial)':LogisticRegression(penalty = 'l2',solver='lbfgs',multi_class='multinomial'),
+            }
+
+n_classifier = len(classifier)
+
+n_features = image_size * image_size
+
+# prepare train data
+n_train_samples, _, _= train_dataset.shape
+train_data = np.reshape(train_dataset,(n_train_samples, n_features))
+
+# prepare valid data
+n_valid_samples, _, _= valid_dataset.shape
+valid_data = np.reshape(valid_dataset,(n_valid_samples, n_features))
+
+# prepare test data
+n_test_samples, _, _= test_dataset.shape
+test_data = np.reshape(test_dataset,(n_test_samples, n_features))
+            
+for index,(name,classifier) in enumerate(classifier.items()):
+    classifier.fit(train_data,train_labels)
+            
+    rate = classifier.score(test_data, test_labels)
+    print("classifier rate for %s : %f " % (name, rate))
+```  
 ### train methods
+**Ridge Regression**  
+Lasso  
+Multi-task Lasso  
 ### result
