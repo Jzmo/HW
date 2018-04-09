@@ -24,6 +24,13 @@ This project is to understand the basic process of tensorflow machine learning<b
   * if needed, run other operation and print log information<br>
 * test the accurancy<br>
 * plot (use matplotlib)<br>
+### parameter
+learning rate  |epochs | optimizer | loss function  
+:--------- | :--------| :-------- | :-------- | :--------
+0.1  | 500 | Relu | Gradient Descent | Square Loss
+### methods
+**Gradient Descent**  
+**Square Loss**  
 ### result
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/result.PNG)
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/linearRegression.png)
