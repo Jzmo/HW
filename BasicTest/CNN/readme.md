@@ -28,7 +28,9 @@ learning rate  | batch size | epochs | activation in conv| pooling |optimizer | 
 
 ### methods
 **Relu**  
-**max pool**  
+In the context of artificial neural networks, the rectifier is an activation function defined as the positive part of its argument:
+![equation](http://latex.codecogs.com/gif.latex?f(x)=x^{&plus;}=\max(0,x))
+
 **Adam** 
 
 ### result
