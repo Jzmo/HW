@@ -138,4 +138,5 @@ The objective function to minimize is:
 * ![equation](http://latex.codecogs.com/gif.latex?\min&space;_\omega&space;\frac{1}{2n_{samples}}\left&space;\|&space;X\omega-y&space;\right&space;\|{_{2}}^{2}&plus;\alpha\left&space;\|&space;\omega&space;\right&space;\|_{1})
 
 **Multi-task Lasso**  
+ongoing...
 ### result
