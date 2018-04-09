@@ -21,4 +21,10 @@ learning rate  | batch size | epochs | activation functions | optimizer | loss f
 :--------- | :--------| :--------|  
 0.1 - 0.001  | 200 | 20  | Softmax | Gradient Descent | cross-entropy |
 
+
+  表头  | 表头
+  ------------- | -------------
+ 单元格内容  | 单元格内容
+ 单元格内容l  | 单元格内容
+
 #### result
