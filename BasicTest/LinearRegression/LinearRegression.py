@@ -13,8 +13,8 @@ seed = np.random.seed(21)
 
 # set learning parameter
 learning_rate = 0.1
-learning_epochs = 500
-display_time = 20
+learning_epochs = 200
+display_time = 10
 # set train dataset
 train_x = np.arange(0,10,1,dtype = np.float32)
 train_y = train_x*2+np.random.randn(10,)
@@ -23,7 +23,7 @@ print("train Y:", train_y)
 
 # set test dataset
 test_x = np.asarray([1.3,4.6,6.6,3.4,9.4,4.2,1.1,2.3,4.9])
-test_y = test_x*2
+test_y = test_x*2+np.random.randn(9,)
 print("test X:", test_x)
 print("test Y:", test_y)
 
@@ -43,6 +43,11 @@ perd = tf.add((input_x*Weight),bias)
 cost = tf.reduce_sum(tf.pow(perd-input_y,2))/(2*n_samples)
 optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
 
+# set test data base
+test_input_y = tf.placeholder(dtype = np.float32,name = 'test_input_y')
+test_input_x = tf.placeholder(dtype = np.float32,name = 'test_input_x')
+pred_test_y = tf.add(Weight*test_x,bias)
+final_loss = tf.reduce_sum(tf.pow(pred_test_y-test_y,2))/(2*9)
 # init saver
 saver = tf.train.Saver()
 # init variable
@@ -57,17 +62,21 @@ with tf.Session() as sess:
             
         # log information at each eposh
         if epoch % display_time == 0 :
-            W = sess.run(Weight)
-            b = sess.run(bias)
-            c = sess.run(cost,feed_dict = {input_x:x,input_y:y})
-            print("training eposh:",epoch," Weight:",W," bias:",b," cost: ",c)
+            print("training eposh:",epoch," Weight:",sess.run(Weight),
+                " bias:",sess.run(bias),
+                " cost: ",sess.run(final_loss,feed_dict = {
+                input_x:x,input_y:y,
+                test_input_x:test_x,test_input_y:test_y}))
+                
     print("=================================")
-    
+    print("training eposh:",epoch," Weight:",sess.run(Weight),
+        " bias:",sess.run(bias))
     # testing and print accurancy
-    pred_y = tf.add(W*test_x,b)
-    accracy = tf.reduce_sum(tf.pow(test_y-pred_y,2))/(2*n_samples)
-    print("test accuracy:",sess.run(accracy))
-    
+    print("test square loss:",sess.run(final_loss,feed_dict = {
+        input_x:x,input_y:y,
+        test_input_x:test_x,test_input_y:test_y}))
+    W = sess.run(Weight)
+    b = sess.run(bias)
     # save net
     savepath = root + "\linearmodel.ckpt"
     savepath = saver.save(sess,savepath)
