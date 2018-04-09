@@ -26,4 +26,9 @@ learning rate  | batch size | epochs | activation in conv| pooling |optimizer | 
 :--------- | :--------| :-------- | :-------- | :-------- | :--------  | :--------  | :-------- 
 0.0001  | 200 | 20  | Relu | max pool | Adam | Softmax | Cross-entropy
 
+### methods
+**Relu**  
+**max pool**  
+**Adam** 
+
 ### result
