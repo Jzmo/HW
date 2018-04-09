@@ -48,6 +48,7 @@ with tf.name_scope('layer1'):
     b = tf.Variable(np.zeros(n_output,))
     y = tf.nn.softmax(tf.matmul(x,W)+b)
     loss = -tf.reduce_sum(y_*tf.log(y))
+
     summaries.variable_summaries(W,'weight')
     summaries.variable_summaries(b,'bias')
     tf.summary.histogram('activated_output',y)
