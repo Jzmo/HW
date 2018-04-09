@@ -7,7 +7,7 @@ Some examples of letter "A":
 ![image](http://yaroslavvb.com/upload/notMNIST/nmn.png)  
 Data details can be found in [here](http://yaroslavvb.blogspot.hk/2011/09/notmnist-dataset.html)
 ### preprocess
-Note: Here only problems listed in the class are given. Detials of main process can be found in [here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/udacity/1_notmnist.ipynb)  : 
+**Note:** Here only problems listed in the class are given. Details of main process can be found in [here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/udacity/1_notmnist.ipynb)  : 
 **problem 1**  
 Let's take a peek at some of the data to make sure it looks sensible. Each exemplar should be an image of a character A through J rendered in a different font. Display a sample of the images that we just downloaded.  
 ```python
