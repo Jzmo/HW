@@ -28,7 +28,7 @@ This project is to understand the basic process of tensorflow machine learning<b
 
 ### parameter
 learning rate  |epochs | optimizer | loss function  
-:--------- | :--------| :-------- | :-------- | :--------
+:--------- | :--------| :-------- | :-------- 
 0.1  | 500 | Gradient Descent | Square Loss
 
 ### methods
