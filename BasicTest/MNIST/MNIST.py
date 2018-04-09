@@ -6,7 +6,7 @@ mnist = input_data.read_data_sets('./',one_hot = True)
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-
+import summaries
 img_size = 28
 n_output = 10
 n_feature = img_size*img_size
@@ -14,18 +14,10 @@ traning_num = 55000
 validation_num = 5000
 test_num = 10000
 
+root = r'D:\code\tf\BasicTest\MNIST'
+
 def vector_2_image(img_vector, img_height, img_width):
-    total_length = img_vector.shape[0]
-    if total_length != img_height * img_width:
-        raise Exception(
-            "image size doesn't agree with the height and width:",
-            total_length,"with",img_height * img_width)
-    img = np.zeros((img_height, img_width),dtype = np.float64)
-    w = 0
-    for h in range(img_height):
-        img[h,:] = img_vector[h * img_width : 
-            (h+1) * img_width]
-            
+    img = tf.reshape(img_vector,[-1,img_height,img_width,1])            
     return img
     
 ## plot one of the images and its label 
@@ -45,40 +37,55 @@ batch_size = 20
 
 learning_iterations = int(traning_num / batch_size)
 
-#set variables:
-W = tf.Variable(np.zeros([img_size*img_size,n_output]))
-b = tf.Variable(np.zeros(n_output,))
-
 #set placeholder
-x = tf.placeholder(dtype = np.float64,name = 'x',shape = [None,n_feature])
-y = tf.nn.softmax(tf.matmul(x,W)+b)
-y_ = tf.placeholder(dtype = np.float64,name = 'y_',shape = [None,n_output])
+with tf.name_scope('input'):
+    x = tf.placeholder(dtype = np.float64,name = 'x',shape = [None,n_feature])
+    y_ = tf.placeholder(dtype = np.float64,name = 'y_',shape = [None,n_output])
 
-loss = -tf.reduce_sum(y_*tf.log(y))
+#set variables:
+with tf.name_scope('layer1'):
+    W = tf.Variable(np.zeros([img_size*img_size,n_output]))
+    b = tf.Variable(np.zeros(n_output,))
+    y = tf.nn.softmax(tf.matmul(x,W)+b)
+    loss = -tf.reduce_sum(y_*tf.log(y))
+    summaries.variable_summaries(W,'weight')
+    summaries.variable_summaries(b,'bias')
+    tf.summary.histogram('activated_output',y)
+    tf.summary.scalar('cross_entropy',loss)
+
+#accurancy
+with tf.name_scope('output'):
+    right_pred = tf.equal(tf.argmax(y,1),tf.argmax(y_,1))
+    accurancy = tf.reduce_mean(tf.cast(right_pred,np.float64))
+    tf.summary.scalar('test_accurancy',accurancy)
+    
+# set summary
+sess = tf.InteractiveSession()
+merged = tf.summary.merge_all()
+train_writer = tf.summary.FileWriter(root + '/train_log',sess.graph)    
+test_writer = tf.summary.FileWriter(root + '/test_log')    
 
 # set net choice
 optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
 
-#accurancy
-x_test = tf.placeholder(dtype = np.float64,name = 'x_test',shape = [None,n_feature])
-ytest = tf.nn.softmax(tf.matmul(x_test,W)+b)
-y_test = tf.placeholder(dtype = np.float64,name = 'y_test',shape=[None,n_output])
-right_pred = tf.equal(tf.argmax(ytest,1),tf.argmax(y_test,1))
-accurancy = tf.reduce_mean(tf.cast(right_pred,np.float64))
-
 init = tf.global_variables_initializer()
 
-with tf.Session() as sess:
-    sess.run(init)
-    for epoch in range(learning_epochs):
-        for iteration  in range(learning_iterations):
-            images_feed, labels_feed = mnist.train.next_batch(batch_size)
-            type(images_feed)
-            sess.run(optimizer,feed_dict = {x:images_feed,y_:labels_feed})
-        #log information
-        images_test, labels_test = mnist.train.next_batch(test_num)
-        print("epoch:",epoch,
-            "accurancy:",sess.run(accurancy,feed_dict = {x:images_feed,y_:labels_feed,
-                x_test:images_test,y_test:labels_test}))
+sess.run(init)
+
+for epoch in range(learning_epochs):
+    for iteration  in range(learning_iterations):
+        images_feed, labels_feed = mnist.train.next_batch(batch_size)
+        summary_str,_ = sess.run([merged, optimizer],feed_dict = 
+            {x:images_feed,y_:labels_feed})
+        train_writer.add_summary(summary_str,iteration+epoch*learning_iterations)
+    #log information
+    images_test, labels_test = mnist.train.next_batch(test_num)
+    summary_str, ac = sess.run([merged, accurancy],feed_dict = 
+            {x:images_test,y_:labels_test})
+
+    print("epoch:",epoch, "accurancy:",ac)
+    
+train_writer.close()
+test_writer.close()
 
     
