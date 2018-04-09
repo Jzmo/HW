@@ -21,7 +21,7 @@ download and extracte data by [input_data.py](https://tensorflow.googlesource.co
 ### process
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/CNN/cnn1.png)
 ### parameter
-learning rate  | batch size | epochs | activation functions in conv layer | pooling |optimizer | activation functions in fc layer | loss function  
+learning rate  | batch size | epochs | activation in conv layer | pooling |optimizer | activation in fc layer | loss function  
 :--------- | :--------| :-------- | :-------- | :-------- | :--------  | :--------  | :-------- 
 0.0001  | 200 | 20  | Relu | max pool | Adam | Softmax | Cross-entropy
 
