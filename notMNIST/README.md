@@ -121,6 +121,8 @@ for index,(name,classifier) in enumerate(classifier.items()):
 ```  
 ### train methods
 **Ridge Regression**  
+Ridge regression addresses some of the problems of Ordinary Least Squares by imposing a penalty on the size of coefficients. The ridge coefficients minimize a penalized residual sum of squares.  
+$\min _\omega \left \| X\omega - y \right \|{_{2}}^{2} + \left \| \alpha \right \|{_{2}}^{2}$  
 Lasso  
 Multi-task Lasso  
 ### result
