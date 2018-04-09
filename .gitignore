@@ -19,3 +19,4 @@ notMNIST/notMNIST_small/
 idea/
 SAR/
 BasicTest/MNIST/input_data.py
+*.vsdx

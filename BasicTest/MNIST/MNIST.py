@@ -39,9 +39,10 @@ def vector_2_image(img_vector, img_height, img_width):
 # mnist.train.labels[:,:]
 
 ## one layer simple neural network
-learning_rate = 0.001
+learning_rate = 0.0001
 learning_epochs = 20
-batch_size = 200
+batch_size = 20
+
 learning_iterations = int(traning_num / batch_size)
 
 #set variables:
@@ -59,7 +60,10 @@ loss = -tf.reduce_sum(y_*tf.log(y))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
 
 #accurancy
-right_pred = tf.equal(tf.argmax(y,1),tf.argmax(y_,1))
+x_test = tf.placeholder(dtype = np.float64,name = 'x_test',shape = [None,n_feature])
+ytest = tf.nn.softmax(tf.matmul(x_test,W)+b)
+y_test = tf.placeholder(dtype = np.float64,name = 'y_test',shape=[None,n_output])
+right_pred = tf.equal(tf.argmax(ytest,1),tf.argmax(y_test,1))
 accurancy = tf.reduce_mean(tf.cast(right_pred,np.float64))
 
 init = tf.global_variables_initializer()
@@ -72,7 +76,9 @@ with tf.Session() as sess:
             type(images_feed)
             sess.run(optimizer,feed_dict = {x:images_feed,y_:labels_feed})
         #log information
+        images_test, labels_test = mnist.train.next_batch(test_num)
         print("epoch:",epoch,
-            "accurancy:",sess.run(accurancy,feed_dict = {x:images_feed,y_:labels_feed}))
+            "accurancy:",sess.run(accurancy,feed_dict = {x:images_feed,y_:labels_feed,
+                x_test:images_test,y_test:labels_test}))
 
     
