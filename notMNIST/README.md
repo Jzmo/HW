@@ -121,8 +121,21 @@ for index,(name,classifier) in enumerate(classifier.items()):
 ```  
 ### train methods
 **Ridge Regression**  
-Ridge regression addresses some of the problems of Ordinary Least Squares by imposing a penalty on the size of coefficients. The ridge coefficients minimize a penalized residual sum of squares.  
-$\min _\omega \left \| X\omega - y \right \|{_{2}}^{2} + \left \| \alpha \right \|{_{2}}^{2}$  
-Lasso  
-Multi-task Lasso  
+>Ridge regression addresses some of the problems of Ordinary Least Squares by imposing a penalty on the size of coefficients. The ridge coefficients minimize a penalized residual sum of squares.  
+[see Ridge](https://en.wikipedia.org/wiki/Ridge)  
+
+The objective function to minimize is:
+
+* ![equation](http://latex.codecogs.com/gif.latex?\min&space;_\omega&space;\left&space;\|&space;X\omega&space;-&space;y&space;\right&space;\|{_{2}}^{2}&space;&plus;&space;\left&space;\|&space;\alpha&space;\right&space;\|{_{2}}^{2})  
+
+![equation](http://latex.codecogs.com/gif.latex?\alpha&space;>&space;0)  is a complexity parameter that controls the amount of shrinkage. Ridge in scikit-learn takes x, y in its **fit** method and stores the coefficients w of the linear model in its **coef_** member  
+**Lasso**    
+>The Lasso is a linear model that estimates sparse coefficients. It is useful in some contexts due to its tendency to prefer solutions with fewer parameter values, effectively reducing the number of variables upon which the given solution is dependent. For this reason, the Lasso and its variants are fundamental to the field of compressed sensing. Under certain conditions, it can recover the exact set of non-zero weights.  
+[see Lasso](https://en.wikipedia.org/wiki/Lasso_(statistics))  
+
+The objective function to minimize is:
+
+* ![equation](http://latex.codecogs.com/gif.latex?\min&space;_\omega&space;\frac{1}{2n_{samples}}\left&space;\|&space;X\omega-y&space;\right&space;\|{_{2}}^{2}&plus;\alpha\left&space;\|&space;\omega&space;\right&space;\|_{1})
+
+**Multi-task Lasso**  
 ### result
