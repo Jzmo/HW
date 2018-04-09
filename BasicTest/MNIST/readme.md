@@ -36,6 +36,6 @@ The softmax function is used in various multiclass classification methods. In mu
 
 **Cross entropy**  
 Cross entropy can be used to define the loss function in machine learning and optimization. The true probability **p_i** is the true label, and the given distribution **q_i** is the predicted value of the current model.  Cross entropy is used to get a measure of dissimilarity between p and q:
-![equation](http://latex.codecogs.com/gif.latex?H(p,q)=-\sum_{i}&space;p_{i}log(q_{i}))
+* ![equation](http://latex.codecogs.com/gif.latex?H(p,q)=-\sum_{i}&space;p_{i}log(q_{i}))
 
 ### result
