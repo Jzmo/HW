@@ -17,14 +17,9 @@ the [MNIST](http://yann.lecun.com/exdb/mnist/) DATABASE of handwritten digits is
 ### process
 ### parameter
 
-learning rate  | batch size | epochs | activation functions
-:--------- | :--------| :-------- 
-0.1 - 0.001  | 200 | 20  | Softmax
+learning rate  | batch size | epochs | activation functions | optimizer | loss function  
 
-
-  表头  | 表头
-  ------------- | -------------
- 单元格内容  | 单元格内容
- 单元格内容l  | 单元格内容
+:--------- | :--------| :-------- | :-------- | :-------- | :-------- 
+0.1 - 0.001  | 200 | 20  | Softmax | Gradient Descent | cross-entropy
 
 #### result
