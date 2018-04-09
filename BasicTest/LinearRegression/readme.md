@@ -29,8 +29,13 @@ learning rate  |epochs | optimizer | loss function
 :--------- | :--------| :-------- | :-------- | :--------
 0.1  | 500 | Gradient Descent | Square Loss
 ### methods
-**Gradient Descent**  
-**Square Loss**  
+**Gradient Descent**  
+To find a local minimum of a function using gradient descent, one takes steps proportional to the negative of the gradient (or of the approximate gradient) of the function at the current point. If instead one takes steps proportional to the positive of the gradient, one approaches a local maximum of that function; the procedure is then known as gradient ascent.
+[see gradient descent](https://en.wikipedia.org/wiki/Gradient_descent)  
+![equation](http://latex.codecogs.com/gif.latex?x{_{n&plus;1}}=x_{n}-\gamma&space;\bigtriangledown&space;F(a^{{n}}))  
+**Square Loss**    
+Quadratic loss function is commonly use in linear regression. The loss function is:  
+![equation](http://latex.codecogs.com/gif.latex?l(x)=C(x_{predict}-x_{input})^{2})  
 ### result
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/result.PNG)
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/linearRegression.png)
