@@ -1,6 +1,5 @@
 ### A simple linear regression
 This project is to understand the basic process of tensorflow machine learning<br>
-linearRegression.py file: Jzmo/tf/BasicTest/Linear Regression<br>
 
 #### data
 * train data:<br>
