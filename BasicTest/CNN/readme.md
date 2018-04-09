@@ -19,9 +19,18 @@ download and extracte data by [input_data.py](https://tensorflow.googlesource.co
 	* including images 1 * 784 (28 * 28) * 5000 and labels (10 * 5000)
 	* to get the final accuracy
 ### process
-![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/net1.png)
+![image](https://github.com/Jzmo/tf/raw/master/BasicTest/CNN/cnn1.png)
+
 ### parameter
-learning rate  | batch size | epochs | activation functions | optimizer | loss function  
-:--------- | :--------| :-------- | :-------- | :-------- | :-------- 
-0.1 - 0.001  | 200 | 20  | Softmax | Gradient Descent | Cross-entropy
+learning rate  | batch size | epochs | activation in conv| pooling |optimizer | activation in fc| loss function  
+:--------- | :--------| :-------- | :-------- | :-------- | :--------  | :--------  | :-------- 
+0.0001  | 200 | 20  | Relu | max pool | Adam | Softmax | Cross-entropy
+
+### methods
+**Relu**  
+In the context of artificial neural networks, the rectifier is an activation function defined as the positive part of its argument:
+![equation](http://latex.codecogs.com/gif.latex?f(x)=x^{&plus;}=\max(0,x))
+
+**Adam** 
+
 ### result
