@@ -7,7 +7,8 @@ This project is to understand the basic process of tensorflow machine learning<b
   * y:[-0.05196425  1.88880395  5.0417968   4.74326071  8.74538768  8.28894624  11.79413562 13.76542871 17.12814404 17.98737405]<br>
 * test data:<br>
   * x:[1.3 4.6 6.6 3.4 9.4 4.2 1.1 2.3 4.9]<br>
-  * y:[ 2.6  9.2 13.2  6.8 18.8  8.4  2.2  4.6  9.8]<br>
+  * y:[ 1.98679971 10.5736885  14.81099198  6.11077173 19.49192371  7.9518844
+  2.36234247  4.85722913  8.52454414]<br>
   
 ### process
 * set parameter<br>
@@ -45,4 +46,5 @@ Quadratic loss function is commonly use in linear regression. The loss function 
 
 ### result
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/result.PNG)
+![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/testloss.PNG)
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/LinearRegression/linearRegression.png)
