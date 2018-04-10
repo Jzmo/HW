@@ -20,3 +20,4 @@ idea/
 SAR/
 BasicTest/MNIST/input_data.py
 *.vsdx
+events.*
