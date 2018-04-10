@@ -45,5 +45,5 @@ the main Graph generated in tensorboard
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/train_re.PNG)  
 the accuracy and cross entropy (estimated by test trainbase) 
   
-![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/test_re.PNG)
+![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/test_re.PNG)  
 the accuracy and cross entropy (estimated by test testbase)
