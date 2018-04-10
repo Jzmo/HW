@@ -9,8 +9,11 @@ import os
 import sys
 import tarfile
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import learning_curve
+from sklearn.model_selection import ShuffleSplit
 from six.moves.urllib.request import urlretrieve
 from six.moves import cPickle as pickle
+import plt_curve
 
 
 # First, we'll download the dataset to our local machine. The data consists of characters rendered in a variety of fonts on a 28x28 image. The labels are limited to 'A' through 'J' (10 classes). The training set has about 500k and the testset 19000 labeled examples. Given these sizes, it should be possible to train models quickly on any machine.
@@ -371,16 +374,21 @@ valid_data = np.reshape(valid_dataset,(n_valid_samples, n_features))
 n_test_samples, _, _= test_dataset.shape
 test_data = np.reshape(test_dataset,(n_test_samples, n_features))
             
-for index,(name,classifier) in enumerate(classifier.items()):
-    classifier.fit(train_data,train_labels)
+# for index,(name,classifier) in enumerate(classifier.items()):
+    # classifier.fit(train_data,train_labels)
             
-    rate = classifier.score(test_data, test_labels)
-    print("classifier rate for %s : %f " % (name, rate))
-    print(classifier[1].coef_)
+    # rate = classifier.score(test_data, test_labels)
+    # print("classifier rate for %s : %f " % (name, rate))
     
+# Cross validation with 100 iterations to get smoother mean test and train
+# score curves, each time with 20% data randomly selected as a validation set.
+cv = ShuffleSplit(n_splits=100, test_size=0.2, random_state=0)
+for index,(name,classifier) in enumerate(classifier.items()):
+    title = name
+    estimator = classifier
+    plt_curve.plot_learning_curve(estimator, title, test_data, test_labels, cv=cv)   
     
-    
-    
+plt.show()    
     
     
     

@@ -14,7 +14,7 @@ traning_num = 55000
 validation_num = 5000
 test_num = 10000
 
-root = r'D:\code\tf\BasicTest\MNIST'
+root = r'F:\Jzmo\tf\BasicTest\MNIST'
 
 def vector_2_image(img_vector, img_height, img_width):
     img = tf.reshape(img_vector,[-1,img_height,img_width,1])            
@@ -83,7 +83,7 @@ for epoch in range(learning_epochs):
     images_test, labels_test = mnist.train.next_batch(test_num)
     summary_str, ac = sess.run([merged, accurancy],feed_dict = 
             {x:images_test,y_:labels_test})
-
+    test_writer.add_summary(summary_str,epoch)
     print("epoch:",epoch, "accurancy:",ac)
     
 train_writer.close()

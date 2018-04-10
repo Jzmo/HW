@@ -9,15 +9,15 @@ import tensorflow as tf
 import summaries
 
 img_size = 28
-traning_num = 55000
-validation_num = 5000
-test_num = 10000
-batch_size = 200
+traning_num = 5500
+validation_num = 500
+test_num = 1000
+batch_size = 100
 
 learning_rate = 0.0001
 learning_epochs = 20
 learning_iterations = int(traning_num / batch_size)
-root = r'D:\code\tf\BasicTest\CNN'
+root = r'F:\Jzmo\tf\BasicTest\CNN'
 # cnn
 def conv2D(origin,filter):
     return tf.nn.conv2d(origin,filter,strides = [1,1,1,1],padding = 'SAME',)
@@ -63,8 +63,8 @@ with tf.name_scope('conv_layer1'):
     W_conv1 = tf.Variable(weight_variable([
         filter_height, filter_width, in_channels, out_channels_layer1]))
     b_conv1 = tf.Variable(bias_variable([out_channels_layer1]))
-    summaries.variable_summaries(W_conv1,'Weight_conv1')
-    summaries.variable_summaries(b_conv1,'bias_conv1')
+    # summaries.variable_summaries(W_conv1,'Weight_conv1')
+    # summaries.variable_summaries(b_conv1,'bias_conv1')
     # conv and pool 
     h_conv1 = tf.nn.relu(conv2D(x_input,W_conv1)+b_conv1)
     h_pool1 = max_pool_2x2(h_conv1)
@@ -81,8 +81,8 @@ with tf.name_scope('conv_layer2'):
     h_conv2 = tf.nn.relu(conv2D(h_pool1,W_conv2)+b_conv2)
     h_pool2 = max_pool_2x2(h_conv2)
     
-    summaries.variable_summaries(W_conv2,'Weight_conv2')
-    summaries.variable_summaries(b_conv2,'bias_conv2')
+    # summaries.variable_summaries(W_conv2,'Weight_conv2')
+    # summaries.variable_summaries(b_conv2,'bias_conv2')
     tf.summary.histogram('hidden_out_conv2',h_conv2)
     tf.summary.histogram('hidden_out_pool2',h_pool2)
 
@@ -95,8 +95,8 @@ with tf.name_scope('fc_layer1'):
     h_pool2_flat = tf.reshape(h_pool2,[-1,7*7*64])
     h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat,W_fc1)+b_fc1)
     
-    summaries.variable_summaries(W_fc1,'Weight_fully_connected1')
-    summaries.variable_summaries(b_fc1,'bias_fully_connected1')
+    # summaries.variable_summaries(W_fc1,'Weight_fully_connected1')
+    # summaries.variable_summaries(b_fc1,'bias_fully_connected1')
     tf.summary.histogram('fully_connected_output1',h_fc1)
 
 #########################  dropout layer
@@ -104,7 +104,7 @@ with tf.name_scope('dropout'):
     keep_prob = tf.placeholder(dtype = tf.float32,name = 'keep_prob')
     h_fc1_drop = tf.nn.dropout(h_fc1,keep_prob)
     
-    tf.summary.scalar('keep_prob',keep_prob)    
+    # tf.summary.scalar('keep_prob',keep_prob)    
     tf.summary.histogram('dropout',h_fc1_drop)    
 
 #########################  out layer
@@ -113,8 +113,8 @@ with tf.name_scope('fc_layer2'):
     W_fc2 = tf.Variable(weight_variable([out_fc1_layer,out_fc2_layer]))
     b_fc2 = tf.Variable(bias_variable([out_fc2_layer]))
     
-    summaries.variable_summaries(W_fc2,'Weight_fully_connected2')
-    summaries.variable_summaries(b_fc2,'bias_fully_connected2') 
+    # summaries.variable_summaries(W_fc2,'Weight_fully_connected2')
+    # summaries.variable_summaries(b_fc2,'bias_fully_connected2') 
 
 with tf.name_scope('output'):
     y = tf.nn.softmax(tf.matmul(h_fc1_drop,W_fc2)+b_fc2)
@@ -142,13 +142,10 @@ for epoch in range(learning_epochs):
     for iteration in range(learning_iterations):
         images_feed, labels_feed = mnist.train.next_batch(batch_size)
         if iteration % 100 == 0 and epoch>=1:
-            print(epoch)
-            print(sess.run(W_conv1))
             summary_str, _ = sess.run([merged, optimizer], feed_dict = 
                 {x:images_feed,y_:labels_feed,keep_prob : 0.5})
             train_writer.add_summary(summary_str,iteration+epoch*learning_iterations)
         else:
-            print(epoch,iteration,learning_iterations)
             sess.run(optimizer, feed_dict = 
                 {x:images_feed,y_:labels_feed,keep_prob : 0.5})
     #log information    
