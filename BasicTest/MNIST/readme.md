@@ -22,7 +22,7 @@ download and extracte data by [input_data.py](https://tensorflow.googlesource.co
 	* to get the final accuracy
 	
 ### process
-![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/net1.png)
+![the structure of this net](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/net1.png)
 
 ### parameter
 learning rate  | batch size | epochs | activation functions | optimizer | loss function  
@@ -39,3 +39,8 @@ Cross entropy can be used to define the loss function in machine learning and op
 * ![equation](http://latex.codecogs.com/gif.latex?H(p,q)=-\sum_{i}&space;p_{i}log(q_{i}))
 
 ### result
+![the main Graph generated in tensorboard](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/mainGraph.png)
+
+![the accuracy and cross entropy (estimated by test trainbase)](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/train_re.png)
+
+![the accuracy and cross entropy (estimated by test testbase)](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/test_re.png)

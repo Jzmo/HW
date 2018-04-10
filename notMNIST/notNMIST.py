@@ -78,7 +78,6 @@ def maybe_extract(filename, force = False):
     if len(data_folder) != num_classes:
         raise Exception(
         "Expected %d folders, one per class. Found %d instead" % (num_classes, len(data_folder)))
-    print("data_folder")
     return data_folder
     
 train_folders = maybe_extract(train_filename)
@@ -123,7 +122,6 @@ def load_letter(folder, min_num_images):
     dataset = np.ndarray(shape =(len(image_files),image_size,image_size),
     dtype = np.float32)
     
-    print(folder)
     num_image =0
     for image in image_files:
         imagefile = os.path.join(folder,image)
@@ -242,9 +240,6 @@ def merge_datasets(pickle_files,train_size,valid_size = 0):
     
     valid_dataset, valid_label = make_array(num_classes*valid_size, image_size)
     train_dataset, train_label = make_array(num_classes*train_size, image_size)
-    
-    print(valid_dataset.shape)
-    print(train_dataset.shape)
     
     for label, pickle_file in enumerate(pickle_files):
         try:
@@ -374,14 +369,19 @@ valid_data = np.reshape(valid_dataset,(n_valid_samples, n_features))
 n_test_samples, _, _= test_dataset.shape
 test_data = np.reshape(test_dataset,(n_test_samples, n_features))
             
-# for index,(name,classifier) in enumerate(classifier.items()):
-    # classifier.fit(train_data,train_labels)
+for index,(name,classifier) in enumerate(classifier.items()):
+    classifier.fit(train_data,train_labels)
             
-    # rate = classifier.score(test_data, test_labels)
-    # print("classifier rate for %s : %f " % (name, rate))
+    rate = classifier.score(test_data, test_labels)
+    print("classifier rate for %s : %f " % (name, rate))
     
+
 # Cross validation with 100 iterations to get smoother mean test and train
 # score curves, each time with 20% data randomly selected as a validation set.
+classifier = {'L1 logistic':LogisticRegression(penalty = 'l1'),
+            'L2 logistic':LogisticRegression(penalty = 'l2'),
+            'L2 logistic(Multinomial)':LogisticRegression(penalty = 'l2',solver='lbfgs',multi_class='multinomial'),
+            }
 cv = ShuffleSplit(n_splits=100, test_size=0.2, random_state=0)
 for index,(name,classifier) in enumerate(classifier.items()):
     title = name
@@ -389,27 +389,5 @@ for index,(name,classifier) in enumerate(classifier.items()):
     plt_curve.plot_learning_curve(estimator, title, test_data, test_labels, cv=cv)   
     
 plt.show()    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
