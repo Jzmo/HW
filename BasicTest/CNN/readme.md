@@ -34,7 +34,6 @@ In the context of artificial neural networks, the rectifier is an activation fun
 **Adam** 
 
 ### result
-### result
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/CNN/mainG.png)  
 the main Graph generated in tensorboard
 
@@ -45,4 +44,4 @@ the accuracy and cross entropy (estimated by test trainbase)
 the accuracy and cross entropy (estimated by test testbase)
 
 **Compare to MNIST_training_model by simple layer neural net, the accuracy improve from about 90% to above 97%**  
-**Actrally the result was got by only 5500 samples, when using 55000 samples the accuracy was up to about 99.5%. But it took too long time and I forgot to save the result**  
+**Actrally the result was got by only 5500 samples, when using 55000 samples the accuracy was up to about 99.5%. But it took too long time and I forgot to save the result**:expressionless:   
