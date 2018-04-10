@@ -149,8 +149,5 @@ the validation curve by L1 regression method
   
 ![image](https://github.com/Jzmo/tf/raw/master/notMNIST/L2.png)  
 the validation curve by L2 regression method
-   
-![image](https://github.com/Jzmo/tf/raw/master/notMNIST/L2_mul.png)  
-the validation curve by L2 regression method(multinomial)
 
-Other visual model assessments are ongoing...
+**Other visual model assessments are ongoing...**
