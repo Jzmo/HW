@@ -18,6 +18,5 @@ notMNIST/notMNIST_large/
 notMNIST/notMNIST_small/
 idea/
 SAR/
-BasicTest/MNIST/input_data.py
 *.vsdx
 events.*
