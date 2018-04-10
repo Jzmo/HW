@@ -39,11 +39,11 @@ Cross entropy can be used to define the loss function in machine learning and op
 * ![equation](http://latex.codecogs.com/gif.latex?H(p,q)=-\sum_{i}&space;p_{i}log(q_{i}))
 
 ### result
-![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/mainGraph.png)
+![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/mainGraph.PNG)  
 the main Graph generated in tensorboard
 
-![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/train_re.png)
-the accuracy and cross entropy (estimated by test trainbase)
-
+![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/train_re.PNG)  
+the accuracy and cross entropy (estimated by test trainbase) 
+  
 ![image](https://github.com/Jzmo/tf/raw/master/BasicTest/MNIST/test_re.PNG)
 the accuracy and cross entropy (estimated by test testbase)
