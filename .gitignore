@@ -18,6 +18,7 @@ notMNIST/notMNIST_large/
 notMNIST/notMNIST_small/
 idea/
 SAR/
+paper/
 *.vsdx
 events.*
 *.mhtml
