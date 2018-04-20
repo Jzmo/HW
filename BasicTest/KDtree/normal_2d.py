@@ -15,3 +15,12 @@ def draw(mu,Sigma,sampleNo):
     plt.show()
     
     return arr
+
+def data(): 
+    np.random.seed(12)
+    mu = np.array([[5, 5]])
+    Sigma = np.array([[3, 4], [1.5, 3]])
+    train = generate(mu,Sigma,20)
+    test = generate(mu,Sigma,5)
+    
+    return train, train_label, test, test_label

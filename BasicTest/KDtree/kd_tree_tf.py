@@ -50,22 +50,10 @@ class KD_TREE():
                 self.__built(less), self.__built(more))              
         return node
 
-    
-np.random.seed(12)
-mu = np.array([[5, 5]])
-Sigma = np.array([[3, 4], [1.5, 3]])
-arr_train = normal_2d.generate(mu,Sigma,100)
-arr_test = normal_2d.generate(mu,Sigma,5)
+def KD_tree_knn(dataset,input_data,isshow = False)
+  
+    K = KD_TREE(dataset,isshow = isshow)
 
-# print(arr_train)
-# arr_train = arr_train[arr_train[:,0].argsort()]
-# split_pos = arr_train.shape[0] // 2
-# m = arr_train[split_pos]
-# print(arr_train)
-# print(m)
-isshow = True 
-K = KD_TREE(arr_train,isshow = isshow)
-
-if isshow:
-    plt.scatter(arr_train[:,0],arr_train[:,1],marker = 'o')
-    plt.show()
+    if isshow:
+        plt.scatter(arr_train[:,0],arr_train[:,1],marker = 'o')
+        plt.show()
