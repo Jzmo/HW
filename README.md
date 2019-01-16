@@ -1,4 +1,4 @@
-# some projects based on tensorflow
+# some basic projects based on tensorflow
 
 ---------
 |link  | content | 
